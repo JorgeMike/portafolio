@@ -199,7 +199,7 @@ export const experiencia: ExperienciaData = {
       endDate: "2024-12",
       location: "Naucalpan, México (presencial)",
       highlights: [
-        "Sistema de Evaluación Docente: reportes de 2-3 semanas manuales a 5 minutos",
+        "Sistema de Evaluación Docente: reportes de 2-3 semanas manuales a 5 minutos automatizados",
       ],
     },
     {

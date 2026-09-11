@@ -2,8 +2,7 @@ import { useState } from "react";
 import { resumen, hero } from "../../data/cv";
 import { useTypewriter } from "../../lib/useTypewriter";
 import { useInView } from "../../lib/useInView";
-import { useMouseParallax } from "../../lib/useMouseParallax";
-import heroImage from "../../assets/hero.png";
+import heroImage from "../../assets/me.png";
 import Reveal from "../terminal/Reveal";
 import Cursor from "../terminal/Cursor";
 import SocialIcons from "../terminal/SocialIcons";
@@ -12,8 +11,6 @@ function Resumen() {
   const { ref, inView } = useInView<HTMLElement>();
   const [showSummary, setShowSummary] = useState(false);
   const [showImageLine, setShowImageLine] = useState(false);
-
-  const { ref: parallaxRef, offset } = useMouseParallax<HTMLDivElement>(4);
 
   const command = useTypewriter(resumen.command, {
     start: inView,
@@ -53,24 +50,14 @@ function Resumen() {
         </div>
 
         {showSummary && (
-          <div
-            ref={parallaxRef}
-            className="relative isolate mx-auto w-64 md:mx-0 md:w-80"
-            style={{ perspective: "1600px" }}
-          >
+          <div className="relative isolate mx-auto w-48 md:mx-0 md:w-64">
             <div
               aria-hidden
               className="absolute inset-0 z-0 scale-100 rounded-full bg-term-green opacity-10 blur-3xl"
             />
 
             <Reveal className="relative z-10">
-              <div
-                className="rounded-md border border-border bg-surface font-mono shadow-2xl transition-transform duration-300 ease-out will-change-transform"
-                style={{
-                  transform: `rotateY(${offset.x}deg) rotateX(${-offset.y}deg)`,
-                  transformStyle: "preserve-3d",
-                }}
-              >
+              <div className="rounded-md border border-border bg-surface font-mono shadow-2xl">
                 <div className="flex items-center gap-1.5 border-b border-border px-3 py-2">
                   <span className="h-2 w-2 rounded-full bg-[#ff5f56]" />
                   <span className="h-2 w-2 rounded-full bg-[#ffbd2e]" />
@@ -87,11 +74,13 @@ function Resumen() {
 
                 {showImageLine && (
                   <Reveal className="border-t border-term-green-dim">
-                    <img
-                      src={heroImage}
-                      alt={resumen.imageAlt}
-                      className="w-full grayscale-40 contrast-125"
-                    />
+                    <div className="overflow-hidden rounded p-4 pb-0">
+                      <img
+                        src={heroImage}
+                        alt={resumen.imageAlt}
+                        className="aspect-[9/10] w-full rounded object-cover object-top contrast-125"
+                      />
+                    </div>
                   </Reveal>
                 )}
               </div>
